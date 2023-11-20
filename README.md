@@ -32,7 +32,9 @@ This is a boss menu script for FiveM utilizing the QBCore framework. The script 
 
 3. Customize the script according to your needs or preferences.
 
-4. Start your QBCore server and enjoy the enhanced boss menu functionality.
+4. Open the "resources" folder in Visual Studio Code and replace all instances of "qb-management" with "Bach-bossmenu."
+   
+6. Start your QBCore server and enjoy the enhanced boss menu functionality.
 
 ## Installation
 
