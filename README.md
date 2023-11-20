@@ -54,5 +54,5 @@ git clone https://github.com/BachWorks/bach-bossmenu.git
 - [qb-core](https://github.com/qbcore-framework/qb-core).
 - [ox_lib](https://github.com/overextended/ox_lib).
 
-## Isssues
+## Issues
 - Found a issue? Open a ticket on my [Discord](https://discord.gg/syAXRWAgTv), and i will do my best to help you resolve the issue
