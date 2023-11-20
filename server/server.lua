@@ -6,7 +6,7 @@ AddEventHandler("bach-bossmenu:loadStash", function(job)
 	local source = source
 	local Player = QBCore.Functions.GetPlayer(source)
 	local name = "bach-bossmenu" .. job
-	exports.ox_inventory:RegisterStash(name, "Lager", 200, 500000)
+	exports.ox_inventory:RegisterStash(name, "Storage", 200, 500000)
 	Wait(100)
 	TriggerClientEvent("bach-bossmenu:openStash", source, name)
 end)
