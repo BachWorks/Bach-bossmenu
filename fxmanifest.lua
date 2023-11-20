@@ -29,4 +29,6 @@ files {
 
 server_exports {
   'AddMoney',
+  'RemoveMoney',
+  'GetAccount',
 }
