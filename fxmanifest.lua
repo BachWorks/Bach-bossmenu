@@ -23,6 +23,6 @@ shared_scripts {
 }
 
 files {
-  'web/build/index.html',
-  'web/build/**/*',
+  'html/build/index.html',
+  'html/build/**/*',
 }
