@@ -13,6 +13,9 @@ local Translations = {
         ["employee_fired"] = "Employee has been fired!",
         ["employee_hired"] = "You have hired a new employee!",
     },
+    ["target"] = {
+        ["openBossmenu"] = "Open Bossmenu",
+    },
 }
 
 Lang = Lang or Locale:new({
