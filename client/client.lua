@@ -6,7 +6,7 @@ local function comma_value(amount)
 	while true do
 		local k
 		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", "%1,%2")
-		if (k == 0) then
+		if k == 0 then
 			break
 		end
 	end
@@ -194,15 +194,42 @@ AddEventHandler("bach-bossmenu:openStash", function(id)
 	TriggerEvent("ox_inventory:openInventory", "stash", id)
 end)
 
-RegisterCommand("bossmenu", function()
-	SendNUIMessage({
-		action = "setVisible",
-		data = true,
-	})
-	SetNuiFocus(true, true)
-end)
+-- RegisterCommand("bossmenu", function() -- Not used anymore
+-- 	SendNUIMessage({
+-- 		action = "setVisible",
+-- 		data = true,
+-- 	})
+-- 	SetNuiFocus(true, true)
+-- end)
 
 RegisterNUICallback("hideUI", function(_, cb)
 	cb({})
 	SetNuiFocus(false, false)
 end)
+
+--- Target
+for k, v in pairs(Config.Locations) do
+	exports["qb-target"]:AddBoxZone("Bach-bossmenu"..v.Job, v.Coords, 1.0, 1.0, {
+		name = "Bach-bossmenu"..v.Job,
+		heading = 0.0,
+		debugPoly = false,
+		minZ = v.Coords.z - 1,
+		maxZ = v.Coords.z + 1,
+	}, {
+		options = {
+			{
+				icon = "fa-solid fa-user",
+				label = Lang:t("target.openBossmenu"),
+				job = v.Job,
+				action = function()
+					SendNUIMessage({
+						action = "setVisible",
+						data = true,
+					})
+					SetNuiFocus(true, true)
+				end,
+			},
+		},
+		distance = 2.5,
+	})
+end
