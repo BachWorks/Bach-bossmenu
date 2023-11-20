@@ -55,4 +55,4 @@ git clone https://github.com/BachWorks/bach-bossmenu.git
 - [ox_lib](https://github.com/overextended/ox_lib).
 
 ## Isssues
-- Found issue? Open a ticket on my [Discord](https://discord.gg/syAXRWAgTv), and i will do my best to help you resolve the issue
+- Found a issue? Open a ticket on my [Discord](https://discord.gg/syAXRWAgTv), and i will do my best to help you resolve the issue
