@@ -26,3 +26,7 @@ files {
   'html/build/index.html',
   'html/build/**/*',
 }
+
+server_exports {
+  'AddMoney',
+}
