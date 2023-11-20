@@ -1,7 +1,9 @@
 Config = {}
 
 Config.Inventory = "ox" -- qb or ox
-Config.Events = {
-	Outfits = "", -- Client
-	Stash = "", -- Currently only ox support
+Config.Locations = {
+	["Police"] = { -- Change the coords
+		Coords = vector3(208.3298, -898.4435, 31.1125),
+		Job = "police",
+	}
 }
