@@ -23,7 +23,6 @@ This is a boss menu script for FiveM utilizing the QBCore framework. The script 
 
 - **Financial Overview:**
   - Monitor the company's financial status.
-  <!-- - View transactions and perform money-related actions. -->
 
 ## Usage
 
