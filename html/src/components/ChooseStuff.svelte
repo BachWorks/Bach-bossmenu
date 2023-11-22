@@ -9,6 +9,7 @@
     nearByPlayers,
     firmaKasse,
     firmaKasseLOG,
+    allTransactions,
   } from "../store/stores";
 
   let selectedGrade = gradeList;
@@ -17,6 +18,7 @@
   let hireShow = false;
   let stashShow = false;
   let overviewShow = true;
+  let transactionsShow = false;
   let clientisBoss = true;
   let moneyShow = false;
   let isModalOpen = false;
@@ -50,15 +52,21 @@
     amount = 0;
   }
 
+  function formatNumber(number) {
+    return new Intl.NumberFormat("dk-DK").format(number);
+  }
   // Const's
 
   const toggleVisibility = (type: string) => {
     employeesShow = type === "employees";
     hireShow = type === "hire";
+    transactionsShow = type === "transactions";
     stashShow = type === "stash";
     overviewShow = type === "overview";
     moneyShow = type === "money";
   };
+
+
 
   const getJob = async () => {
     try {
@@ -228,7 +236,7 @@
   {#if overviewShow}
 
           <div id="main" class="z-10 p-8 w-full h-full flex flex-col gap-4">
-            <div class="h-20 w-full text-white">
+            <div class="h-10 w-full text-white">
                 <span class="font-bold text-3xl text-white uppercase">Oversigt</span>
             </div>
             <div class="w-full h-screen flex flex-row gap-4">
@@ -238,7 +246,7 @@
 
                     </div>
                     <div class="w-full h-14 px-2 flex items-center">
-                        <span class="text-white text-3xl font-semibold">{$firmaKasse} DKK</span>
+                        <span class="text-white text-3xl font-semibold">{formatNumber($firmaKasse)} DKK</span>
                     </div>
                 </div>
                 <div class="w-1/3 h-24 bg-[#303030] border-2 border-[#3D3D3D] rounded-xl"></div>
@@ -252,7 +260,7 @@
   {:else if employeesShow}
 
         <div id="main" class="z-10 p-8 w-full h-full flex flex-col gap-4">
-            <div class="h-20 z-10 w-full text-white">
+            <div class="h-10 z-10 w-full text-white">
                 <span class="font-bold text-3xl text-white uppercase">ANSATTE</span>
             </div>
             <div class="w-full h-screen overflow-y-auto gap-4  z-10">
@@ -325,8 +333,78 @@
 
             </div>
         </div>
+{:else if transactionsShow}
+  <div id="main" class="z-10 p-8 w-full h-full flex flex-col gap-4">
+    <div class="h-10 w-full text-white">
+      <span class="font-bold text-3xl text-white uppercase">Transaktioner</span>
+    </div>
+
+    <div class="w-full h-[550px] border-[#3D3D3D] border-2 rounded bg-[#141414] overflow-y-auto overflow-x-hidden">
+                    <div class="sticky inset-0 w-[55vw] h-12  border-b bg-[#141414] border-[#3D3D3D]  flex flex-row">
+                    <div class="w-14 h-full flex justify-center items-center text-white text-3xl">
+                    </div>
+                    <div class=" w-40 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">Tidspunkt</span>
+                    </div>
+                    <div class=" w-52 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">Person</span>
+
+                    </div>
+                    <div class=" w-40 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">Beløb</span>
+
+                    </div>
+                    <div class=" w-48 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">Grund</span>
+                    </div>
+
+                </div>
+
+                {#each $allTransactions as { id, type, date, user, amount, reason }, index (id)}
+                  <div class="w-full h-12 border-b border-[#3D3D3D]  flex flex-row">
+                    <div class="w-14 h-full flex justify-center items-center text-white text-3xl">
+                      {#if type == "withdraw"}
+                          <i class="bi bi-arrow-up-left-circle-fill"></i>
+                      {:else if type == "deposit"}
+                        <i class="bi bi-arrow-down-right-circle-fill"></i>
+                      {/if}
+                    </div>
+                    <div class=" w-40 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">00/00/0000 00:00</span>
+                    </div>
+                    <div class=" w-52 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">Martin Iversen Petersen</span>
+
+                    </div>
+                    <div class=" w-40 h-full flex justify-center items-center">
+                      {#if type == "withdraw"}
+                        <span class="text-lg text-white">-{formatNumber(amount)} DKK</span>
+                      {:else if type == "deposit"}
+                      
+                        <span class="text-lg text-white">+{formatNumber(amount)} DKK</span>
+                      {/if}
+
+                    </div>
+                    <div class=" w-48 h-full flex justify-center items-center">
+                        <span class="text-lg text-white">Ingen grund sat</span>
+                    </div>
+                  </div>
+
+              {/each}
+
+                
 
 
+
+                </div>
+
+  </div>
+{:else if moneyShow}
+  <div id="main" class="z-10 p-8 w-full h-full flex flex-col gap-4">
+    <div class="h-20 w-full text-white">
+      <span class="font-bold text-3xl text-white uppercase">Konto</span>
+    </div>
+  </div>
   {:else if hireShow}
     <!--  Færdig -->
     <h1 class="text-2xl text-white mb-5 px-9 font-mono">PLAYERS NEARBY</h1>
@@ -1170,6 +1248,10 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -1359,6 +1441,10 @@ video {
   height: 250px;
 }
 
+.h-\[550px\] {
+  height: 550px;
+}
+
 .h-\[300px\] {
   height: 300px;
 }
@@ -1419,7 +1505,7 @@ video {
   height: 30vw;
 }
 
-.h-\[50vw\] {
+.h-\[55vw\] {
   height: 50vw;
 }
 
@@ -1504,6 +1590,10 @@ video {
 
 .w-\[62vw\] {
   width: 62vw;
+}
+
+.w-\[50vw\] {
+  width: 50vw;
 }
 
 .min-w-\[129px\] {
@@ -1596,6 +1686,31 @@ video {
   border-bottom-left-radius: 100%;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333333; 
+  border-bottom-right-radius: 0.375rem;
+  transition: all 0.3s ease-in-out;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555; 
+  border-radius: 0.375rem;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888; 
+  transition: all 0.3s ease-in-out;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1650,6 +1765,13 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(14 22 39 / var(--tw-bg-opacity));
 }
+
+.bg-\[\#141414\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 20 20 / var(--tw-bg-opacity));
+}
+
+
 
 .bg-\[\#303030\] {
   --tw-bg-opacity: 1;
