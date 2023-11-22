@@ -25,6 +25,27 @@ export const users: Writable<Array<any>> = writable([
   },
 ]);
 
+export const allTransactions: Writable<Array<any>> = writable([
+  {
+    id: 1,
+    type: "deposit",
+    date: "00/00/0000 00:00",
+    user: "Martin Iversen Petersen",
+    userIdentifier: "idk set this so it can be tracked",
+    amount: 100000000,
+    reason: "Ingen grund sat!",
+  },
+  {
+    id: 2,
+    type: "withdraw",
+    date: "00/00/0000 00:00",
+    user: "Martin Iversen Petersen",
+    userIdentifier: "idk set this so it can be tracked",
+    amount: 100000000,
+    reason: "Ingen grund sat!",
+  },
+]);
+
 export const gradeList: Writable<Array<any>> = writable([
   {
     id: 1,
@@ -80,7 +101,7 @@ export const nearByPlayers: Writable<Array<any>> = writable([
 ]);
 
 //  Kasse/Society
-export const firmaKasse: Writable<Array<any>> = writable([100]);
+export const firmaKasse: Writable<Array<any>> = writable([100000000]);
 export const firmaKasseLOG: Writable<Array<any>> = writable([
   {
     id: 1,
